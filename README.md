@@ -6,6 +6,6 @@ Video interface using Zynq processor on Zybo Z7-10.  Using a VGA pmod from Digil
 
 ### Tasks
 1. Initial setup of block design 
-2. Testing initial block design
+2. Testing initial block design with 3 RGB colors on monitor
 3. Implement Video DMA (VDMA) IP block
-4. Displaying an image.
+4. Displaying an image on monitor.
