@@ -1,1 +1,45 @@
-hardware/video_interface
+# Ignore all metadata and logs
+.metadata/
+.analytics
+*.log
+*.pdom
+
+# Ignore Eclipse project settings
+*.launch
+*.project
+*.cproject
+*.settings/
+RemoteSystemsTempFiles/
+software/RemoteSystemsTempFiles/
+hardware/RemoteSystemsTempFiles/
+
+# Ignore Vivado/Vitis intermediate and generated output
+*.jou
+*.str
+*.xml
+*.html
+*.xsa
+*.rpt
+*.cache/
+*.runs/
+*.ip_user_files/
+*.hw/
+*.sim/
+*.sdk/
+*.xpr
+*.xise
+*.vivado.log
+vivado.*
+
+software/*
+!software/vga_app/
+software/vga_app/*
+!software/vga_app/src/
+software/vga_app/src/Xilinx.spec
+software/vga_app/src/lscript.ld
+software/vga_app/src/README.txt
+
+vga_redone/
+vga_redone_system/
+zynq_system_wrapper/
+hardware/video_interface/
