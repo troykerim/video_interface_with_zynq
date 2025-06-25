@@ -23,26 +23,59 @@ This project is a gateway to more advanced image processing and video applicatio
 
 ## Task List
 
-1. Display an initial image  
-2. Add VDMA IP block  
-3. Test VDMA  
-4. Display images using the VDMA  
+1. Generating output
+2. Adding VDMA IP block  
+3. Testing the VDMA  
+4. Displaying another image 
 
-## Preliminary Testing
+## Task 1: Generating output
+Before generating an image, I first needed to verify that output data from the FPGA could be transmitted over the VGA pmod.  To do this I created an initial block design without the Video Direct Memory Access (VDMA) and without the Zynq processor.  This involved creating a clock frequency (via clock wizard) that would synchoronize all blocks to common clock.  The frequency chosen was 148.5 MHz.  Since I was not using a Zynq processor, I needed a way to generate data.  The data was generated from a RTL verilog file call dataGen.v which essentially configured an FSM based the logic for VGA using three states: IDLE, SEND_DATA, END_LINE.  These three states describe how data set over VGA would function.  The image below shows the very first block diagram.
 
-## Block Diagram
-### Figure 1. Block Diagram
+![First Block Diagram](./screenshots/initial_block_design.png)
+
+### Preliminary Testing
+
+The images below show the various testing the Data Gen verilog file, the VGA, and the timing of the design.
+
+![Testing Part 1](./screenshots/testing_part1.png)
+![Testing Part 2](./screenshots/testing_part2.png)
+![Testing Part 3](./screenshots/testing_part3.png)
+![Testing Part 4](./screenshots/testing_part4.png)
+
+
+### Displaying  an Image
+
+![RGB Image](./screenshots/displaying_RGB_pattern.png)
+
+After testing the VGA within Vivado's simulators, I then moved into Vitis to setup a software program that would generate a simple RGB image.  The image above shows a 3 colors being displayed on a monitor via the VGA pmod.  
+
+
+
+## Task 2: Adding VDMA IP block 
+### Final Block Diagram
 
 ![Block Diagram](./screenshots/final_block_design.png)
 
-This diagram illustrates the full hardware design built using Vivado's IP Integrator. At the center is the AXI VDMA block, which fetches image data from DDR memory and streams it to the VGA output via the AXI4-Stream interface. The Video Timing Controller generates the necessary VGA sync signals, while the AXI interconnect ensures proper communication between the Zynq Processing System and the peripheral blocks.
+This diagram illustrates the full hardware design built using Vivado's IP Integrator. At the center is the AXI VDMA block, which fetches image data from DDR memory and streams it to the VGA output via the AXI4-Stream interface. The Video Timing Controller generates the necessary VGA sync signals, while the AXI interconnect ensures proper communication between the Zynq Processing System and the peripheral blocks.  Additionally, the Zynq processor needs to be set to 125 MHz as that is the clock frequency of the Zybo Z7-10.  The Zynq processor is then feed directly to the clock wizard block which then converts it to 148.5 MHz.  A clock wizard is needed because the Zynq cannot generate the correct frequency by itself due to clock skew.  
 
 
-## Displaying an Image
+![Physical Setup](./screenshots/physical_setup.jpg)
 
-### Displaying a random Image
+This image here shows the physical setup of the Zybo board with the VGA pmod for all tasks.  
 
-### Diplaying lena
+## Task 3: Testing the VDMA
+
+![Randomly Generated Image](./screenshots/randomly_generated_image.jpg)
+
+Before additional images could be viewed, I created a header file (imageData.h) and another C file (showImage.c) that would display and store images.  I created images by converting them into a character array that stored the image's intensity values.  The character array would then be passed into functions in the C file and then displayed on the monitor.  
+
+## Task 4: Displaying another image 
+
+![Lena Image](./screenshots/lena_gray.bmp)
+
+![Displaying Lena with VGA](./screenshots/displaying_lena.jpg)
+
+The first image shows the image that I planned to load and display into my FPGA.  I converted the lena image into a grayscaled image and then collected all the pixel values into a character array.  Again those values were passed into the showImage.c file and then displayed on my monitor.  
 
 
 ### Notes:
