@@ -33,7 +33,7 @@ This project is a gateway to more advanced image processing and video applicatio
 ## Block Diagram
 ### Figure 1. Block Diagram
 
-![Block Diagram](/home/troy/video_interface_with_zynq/screenshots/final_block_design.png)
+![Block Diagram](./screenshots/final_block_design.png)
 
 This diagram illustrates the full hardware design built using Vivado's IP Integrator. At the center is the AXI VDMA block, which fetches image data from DDR memory and streams it to the VGA output via the AXI4-Stream interface. The Video Timing Controller generates the necessary VGA sync signals, while the AXI interconnect ensures proper communication between the Zynq Processing System and the peripheral blocks.
 
